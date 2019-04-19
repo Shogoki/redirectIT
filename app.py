@@ -12,3 +12,7 @@ def get_new_url(old_url):
 def catch_all():
     new_url = get_new_url(request.url)
     return redirect(new_url, code=302)
+
+
+if __name__ == '__main__':
+app.run(debug=True, host='0.0.0.0', port=5001)
