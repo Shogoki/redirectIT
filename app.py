@@ -11,8 +11,11 @@ def get_new_url(old_url):
 @app.route('/<path:path>')
 def catch_all():
     new_url = get_new_url(request.url)
-    return redirect(new_url, code=302)
+    if(new_url != request.url):
+        return redirect(new_url, code=302)
+    else:
+        return "nothing to redirect"
 
 
 if __name__ == '__main__':
-app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001)
