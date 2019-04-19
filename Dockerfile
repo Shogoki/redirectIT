@@ -9,6 +9,6 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+EXPOSE 80
 
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8028", "--workers=4"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--workers=4"]
