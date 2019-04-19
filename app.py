@@ -1,6 +1,6 @@
 from flask import Flask, redirect
 import re
-
+from static_redirects import static_redirects
 app = Flask(__name__)
 
 def get_new_url(old_url):
@@ -8,6 +8,8 @@ def get_new_url(old_url):
     match = re.search(r'(https?://)(.+)', old_url)
     if(not (match.group(2).startswith('www'))):
         new_url = match.group(1) + 'www.' + match.group(2) 
+    for old, new in static_redirects.items():
+        re.sub(old, new, new_url)
     return   new_url 
 
 @app.route('/', defaults={'path': ''})
