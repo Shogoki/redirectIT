@@ -4,8 +4,11 @@ import re
 app = Flask(__name__)
 
 def get_new_url(old_url):
-    #removing the leading  www.
-    return   re.sub(r'(https?://)www\.', r'\1', old_url)
+    #adding a leading www.
+    match = re.search(r'(https?://)(.+)', old_url)
+    if(not (match.group(2).startswith('www'))):
+        new_url = match.group(1) + 'www.' + match.group(2) 
+    return   new_url 
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
