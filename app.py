@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, request
 import re
 from static_redirects import static_redirects
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def get_new_url(old_url):
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def catch_all():
+def catch_all(path):
     new_url = get_new_url(request.url)
     if(new_url != request.url):
         return redirect(new_url, code=302)
